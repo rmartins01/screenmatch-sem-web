@@ -3,6 +3,7 @@ package br.com.alura.screenmatch;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
@@ -23,6 +24,20 @@ public class Principal {
 	private final String ENDERECO = "https://www.omdbapi.com/?t=";
 	private final String API_KEY = "&apikey=6585022c";
 
+	public static void main(String[] args) {
+		List<Integer> numeros = Arrays.asList(1, 2, 3, 4, 5);
+
+		int soma = numeros.stream()
+		                .peek(n -> System.out.println("Elemento: " + n))
+		                .map(n -> n * 2)
+		                .peek(n -> System.out.println("Conteúdo depois do map: " + n))
+		                .reduce(0, (total, numero) -> total+numero)
+		                
+		                ;
+
+		System.out.println("A soma dos números é: " + soma);
+	}
+	
 	public void exibeMenu() {
 		
 		System.out.println("Digite o nome da série para busca");
@@ -67,5 +82,6 @@ public class Principal {
 		episodios.stream()
 				.filter(e -> e.getDataLancamento() != null && e.getDataLancamento().isAfter(dataBusca))
 				.forEach(e -> System.out.println("Temporada:  " + e.getTemporada() + " Episódio: " + e.getTitulo() + " Data lançamento: " + e.getDataLancamento().format(formatador)));
+		
 	}
 }
